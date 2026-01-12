@@ -1,4 +1,26 @@
 {
-  "files": [],
-  "references": [{ "path": "./tsconfig.node.json" }, { "path": "./tsconfig.web.json" }]
+  "compilerOptions": {
+    "strict": true,
+    "target": "esnext",
+    "lib": ["esnext", "dom", "dom.iterable"],
+    "jsx": "react-jsx",
+    "importHelpers": true,
+    "module": "Node16",
+    "moduleResolution": "Node16",
+    "resolveJsonModule": true,
+    "esModuleInterop": true,
+    "sourceMap": true,
+    "isolatedModules": true,
+    "allowJs": true,
+    "allowSyntheticDefaultImports": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "noEmit": true,
+    "paths": {
+      "~/*": ["./*"],
+      "@*": ["./src/*"]
+    }
+  },
+  "include": ["src", "src/preload/index.d.ts", "electron.vite.config.*"],
+  "exclude": ["node_modules"]
 }

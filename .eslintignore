@@ -1,0 +1,11 @@
+out
+build
+node_modules
+dist
+coverage
+.env
+.vscode
+.DS_Store
+.idea
+*.log
+electron.vite.config.js

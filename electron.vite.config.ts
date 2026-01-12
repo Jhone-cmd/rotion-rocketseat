@@ -11,16 +11,16 @@ export default defineConfig({
       postcss: {
         plugins: [
           tailwindcss({
-            config: './src/renderer/tailwind.config.js'
-          })
-        ]
-      }
+            config: './src/renderer/tailwind.config.js',
+          }),
+        ],
+      },
     },
     resolve: {
       alias: {
-        '@renderer': resolve('src/renderer/src')
-      }
+        '@renderer': resolve('src/renderer/src'),
+      },
     },
-    plugins: [react()]
-  }
+    plugins: [react()],
+  },
 })
