@@ -1,11 +1,11 @@
-import path, { dirname } from 'node:path'
+import path from 'node:path'
 import { defineConfig } from 'electron-vite'
 import react from '@vitejs/plugin-react'
 import tailwindcss from 'tailwindcss'
 
 export default defineConfig({
   main: {
-    publicDir: path.resolve(__dirname,'resources'),
+    publicDir: path.resolve('resources'),
   },
   preload: {},
   renderer: {
