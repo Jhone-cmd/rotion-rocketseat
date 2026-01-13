@@ -13,6 +13,7 @@ function createWindow(): void {
     height: 670,
     show: false,
     autoHideMenuBar: true,
+    backgroundColor: '#17141f',
     ...(process.platform === 'linux' ? { icon: path.resolve(__dirname, '../../resources/icon.png') } : {}),
     webPreferences: {
       preload: path.resolve(__dirname, '../preload/index.js'),
