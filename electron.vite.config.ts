@@ -1,10 +1,12 @@
-import { resolve } from 'path'
+import path, { dirname } from 'node:path'
 import { defineConfig } from 'electron-vite'
 import react from '@vitejs/plugin-react'
 import tailwindcss from 'tailwindcss'
 
 export default defineConfig({
-  main: {},
+  main: {
+    publicDir: path.resolve(__dirname,'resources'),
+  },
   preload: {},
   renderer: {
     css: {
@@ -18,7 +20,7 @@ export default defineConfig({
     },
     resolve: {
       alias: {
-        '@renderer': resolve('src/renderer/src'),
+        '@renderer': path.resolve('src/renderer/src'),
       },
     },
     plugins: [react()],
