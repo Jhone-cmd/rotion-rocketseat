@@ -1,6 +1,7 @@
 import { app, shell, BrowserWindow, ipcMain } from 'electron'
 import path from 'node:path'
 import { electronApp, optimizer, is } from '@electron-toolkit/utils'
+import { registerRoute } from '../lib/electron-router-dom.ts'
 
 function createWindow(): void {
 
@@ -19,12 +20,13 @@ function createWindow(): void {
       x: 20,
       y: 20,
     },
-    ...(process.platform === 'linux' ? { icon: path.resolve(__dirname, '../../resources/icon.png') } : {}),
+    ...(process.platform === 'linux' ? { icon: path.join(__dirname, '../../build/icon.png') } : {}),
     webPreferences: {
       preload: path.resolve(__dirname, '../preload/index.js'),
       sandbox: false,
     },
   })
+
 
   mainWindow.on('ready-to-show', () => {
     mainWindow.show()
@@ -35,13 +37,18 @@ function createWindow(): void {
     return { action: 'deny' }
   })
 
+  registerRoute({
+    id: 'main',
+    browserWindow: mainWindow,
+    htmlFile: path.join(__dirname, '../renderer/index.html'),
+  });
+
   if (is.dev && process.env.ELECTRON_RENDERER_URL) {
     mainWindow.loadURL(process.env.ELECTRON_RENDERER_URL)
   } else {
     mainWindow.loadFile(path.join(__dirname, '../renderer/index.html'))
   }
 }
-
 
 app.whenReady().then(() => {
 
