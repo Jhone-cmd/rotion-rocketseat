@@ -27,6 +27,12 @@ function createWindow(): void {
     },
   })
 
+  registerRoute({
+    id: 'main',
+    browserWindow: mainWindow,
+    htmlFile: path.join(__dirname, '../renderer/index.html'),
+  })
+
 
   mainWindow.on('ready-to-show', () => {
     mainWindow.show()
@@ -37,16 +43,12 @@ function createWindow(): void {
     return { action: 'deny' }
   })
 
-  registerRoute({
-    id: 'main',
-    browserWindow: mainWindow,
-    htmlFile: path.join(__dirname, '../renderer/index.html'),
-  });
-
   if (is.dev && process.env.ELECTRON_RENDERER_URL) {
-    mainWindow.loadURL(process.env.ELECTRON_RENDERER_URL)
+    mainWindow.loadURL(`${process.env.ELECTRON_RENDERER_URL}#main`)
   } else {
-    mainWindow.loadFile(path.join(__dirname, '../renderer/index.html'))
+    mainWindow.loadFile(path.join(__dirname, '../renderer/index.html'), {
+      hash: 'main'
+    })
   }
 }
 

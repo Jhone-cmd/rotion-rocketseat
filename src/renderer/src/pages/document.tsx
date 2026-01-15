@@ -1,14 +1,14 @@
+
 import { Link } from 'react-router-dom'
 
-export function Blank() {
+export function Document() {
   return (
     <main className='flex-1 flex items-center justify-center text-rotion-400'>
-      Selecione ou Crie um Documento
-
+      Seu Documento Está Aqui
 
       <br />
 
-      <Link to="/document">Acessar Documentos</Link>
+      <Link to="/">Acessar Blank</Link>
     </main>
   )
 }
