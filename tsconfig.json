@@ -2,13 +2,18 @@
   "compilerOptions": {
     "strict": true,
     "target": "esnext",
-    "lib": ["esnext", "dom", "dom.iterable"],
+    "lib": [
+      "esnext",
+      "dom",
+      "dom.iterable"
+    ],
     "jsx": "react-jsx",
     "importHelpers": true,
     "module": "Node16",
     "moduleResolution": "Node16",
     "resolveJsonModule": true,
     "esModuleInterop": true,
+    "allowImportingTsExtensions": true,
     "sourceMap": true,
     "isolatedModules": true,
     "allowJs": true,
@@ -17,10 +22,20 @@
     "forceConsistentCasingInFileNames": true,
     "noEmit": true,
     "paths": {
-      "~/*": ["./*"],
-      "@*": ["./src/*"]
+      "~/*": [
+        "./*"
+      ],
+      "@*": [
+        "./src/*"
+      ]
     }
   },
-  "include": ["src", "src/preload/index.d.ts", "electron.vite.config.*"],
-  "exclude": ["node_modules"]
+  "include": [
+    "src",
+    "src/preload/index.d.ts",
+    "electron.vite.config.*"
+  ],
+  "exclude": [
+    "node_modules"
+  ]
 }

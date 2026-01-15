@@ -5,7 +5,7 @@ import tailwindcss from 'tailwindcss'
 
 export default defineConfig({
   main: {
-    publicDir: path.resolve('resources'),
+    publicDir: path.resolve('resources/icon.png'),
   },
   preload: {},
   renderer: {
