@@ -6,7 +6,7 @@ import * as Breadcrumbs from './Breadcrumbs'
 
 export function Header() {
   const isMacOS = window.platform?.isMac;
-  const isSidebarOpen = true
+  const isSidebarOpen = false
 
   return (
     <div
