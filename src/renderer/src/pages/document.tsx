@@ -1,14 +1,28 @@
 
-import { Link } from 'react-router-dom'
+import { ToC } from '../components/ToC'
 
 export function Document() {
   return (
-    <main className='flex-1 flex items-center justify-center text-rotion-400'>
-      Seu Documento Está Aqui
+    <main className='flex-1 flex py-12 px-10 gap-8'>
 
-      <br />
+      <aside className='hidden lg:block sticky top-0'>
 
-      <Link to="/">Acessar Blank</Link>
+        <span className=' text-rotion-300 font-semibold text-xs uppercase'>
+          TABLE OF CONTENTS
+        </span>
+
+        <ToC.Root>
+          <ToC.Link>Back-end</ToC.Link>
+          <ToC.Section>Banco de Dados</ToC.Section>
+          <ToC.Section>Autenticação</ToC.Section>
+        </ToC.Root>
+
+      </aside>
+
+      <section className='flex-1 flex flex-col items-center'>
+        Página Back-end
+      </section>
+
     </main>
   )
 }
