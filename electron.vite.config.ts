@@ -1,13 +1,21 @@
 import path from 'node:path'
 import { defineConfig } from 'electron-vite'
 import react from '@vitejs/plugin-react'
+import tsconfigPathsPlugin from 'vite-tsconfig-paths'
 import tailwindcss from 'tailwindcss'
+
+const tsconfigPaths = tsconfigPathsPlugin({
+  projects: [path.resolve('tsconfig.json')],
+})
 
 export default defineConfig({
   main: {
+    plugins: [tsconfigPaths],
     publicDir: path.resolve('resources/icon.png'),
   },
-  preload: {},
+  preload: {
+    plugins: [tsconfigPaths],
+  },
   renderer: {
     css: {
       postcss: {
@@ -23,6 +31,6 @@ export default defineConfig({
         '@renderer': path.resolve('src/renderer/src'),
       },
     },
-    plugins: [react()],
+    plugins: [tsconfigPaths, react()],
   },
 })
