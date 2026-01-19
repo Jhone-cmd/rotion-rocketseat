@@ -8,8 +8,8 @@ declare global {
   }
 }
 const api = {
-  fetchDocuments(args: any) {
-    return ipcRenderer.invoke('fetch-documents', args)
+  fetchDocuments(): Promise<Array<{ id: number; title: string }>> {
+    return ipcRenderer.invoke('fetch-documents')
   }
 }
 

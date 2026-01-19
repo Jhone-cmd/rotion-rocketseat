@@ -5,12 +5,17 @@ import { CreatePage } from './CreatePage'
 import { Profile } from './Profile'
 import { Search } from './Search'
 import * as Collapsible from "@radix-ui/react-collapsible";
+import { useQuery } from '@tanstack/react-query'
 
 export function Sidebar() {
   const isMacOS = window.platform?.isMac;
 
-  window.api.fetchDocuments('Hello from renderer').then(response => {
-    console.log(response); // Should log: "Received: Hello from renderer"
+  const { data: documents } = useQuery({
+    queryKey: ['documents'],
+    queryFn: async () => {
+      const response = await window.api.fetchDocuments();
+      return response;
+    },
   });
 
   return (
@@ -49,10 +54,9 @@ export function Sidebar() {
           <Navigation.Section>
             <Navigation.SectionTitle>Workspace</Navigation.SectionTitle>
             <Navigation.SectionContent>
-              <Navigation.Link>Untitled</Navigation.Link>
-              <Navigation.Link>Discover</Navigation.Link>
-              <Navigation.Link>Ignite</Navigation.Link>
-              <Navigation.Link>Rocketseat</Navigation.Link>
+              {documents?.map((document: any) => (
+                <Navigation.Link key={document.id}>{document.title || 'Untitled'}</Navigation.Link>
+              ))}
             </Navigation.SectionContent>
           </Navigation.Section>
         </Navigation.Root>
