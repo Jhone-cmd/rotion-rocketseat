@@ -3,6 +3,8 @@ import path from 'node:path'
 import { electronApp, optimizer, is } from '@electron-toolkit/utils'
 import { registerRoute } from '../lib/electron-router-dom.ts'
 
+import './ipc.ts'
+
 function createWindow(): void {
 
   if (process.platform === 'darwin') {
@@ -51,6 +53,8 @@ function createWindow(): void {
     })
   }
 }
+
+console.log(process.platform);
 
 app.whenReady().then(() => {
 

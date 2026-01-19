@@ -9,6 +9,10 @@ import * as Collapsible from "@radix-ui/react-collapsible";
 export function Sidebar() {
   const isMacOS = window.platform?.isMac;
 
+  window.api.fetchDocuments('Hello from renderer').then(response => {
+    console.log(response); // Should log: "Received: Hello from renderer"
+  });
+
   return (
     <Collapsible.Content className="bg-rotion-800 flex-shrink-0 border-r border-rotion-600 h-screen relative group data-[state=open]:animate-slideIn data-[state=closed]:animate-slideOut overflow-hidden">
       <Collapsible.Trigger
