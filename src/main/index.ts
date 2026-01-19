@@ -4,6 +4,7 @@ import { electronApp, optimizer, is } from '@electron-toolkit/utils'
 import { registerRoute } from '../lib/electron-router-dom.ts'
 
 import './ipc.ts'
+import './store.ts'
 
 function createWindow(): void {
 
