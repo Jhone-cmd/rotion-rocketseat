@@ -1,5 +1,6 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { Plus } from 'phosphor-react'
+import { Document } from '@shared/types/ipc'
 
 export function CreatePage() {
   const queryClient = useQueryClient()
@@ -14,7 +15,7 @@ export function CreatePage() {
         if (documents && documents.length >= 0) {
           return [...documents, data]
         }
-        return [data] as any
+        return [data]
       })
     },
   })
