@@ -1,7 +1,8 @@
 import Store from 'electron-store'
+import { Document } from '@shared/types/document'
 
 interface StoreType {
-  documents: Record<string, unknown>
+  documents: Record<string, Document>
 }
 
 const StoreConstructor = (Store as any).default || Store;
