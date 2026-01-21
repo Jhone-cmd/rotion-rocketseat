@@ -5,7 +5,11 @@ import StarterKit from "@tiptap/starter-kit";
 import { Placeholder } from "@tiptap/extension-placeholder";
 import Document from "@tiptap/extension-document";
 
-export function Editor() {
+interface EditorProps {
+  content: string;
+}
+
+export function Editor({ content }: EditorProps) {
   const editor = useEditor({
     extensions: [
       Document.extend({
@@ -17,7 +21,7 @@ export function Editor() {
         placeholder: "Untitled",
         emptyEditorClass: "before:content-[attr(data-placeholder)] before:text-gray-500 before:float-left before:h-0 before:pointer-events-none",
       })],
-    content: "<h1>Back-End</h1><p>This is your new editor.</p>",
+    content,
     autofocus: 'end',
     editorProps: {
       attributes: {
