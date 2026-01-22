@@ -1,4 +1,3 @@
-
 const plugin = require('tailwindcss/plugin')
 /** @type {import('tailwindcss').Config} */
 
@@ -46,6 +45,8 @@ module.exports = {
   },
   plugins: [
     require('@tailwindcss/typography'),
+    require('tailwind-scrollbar'),
+
     plugin(({ addUtilities }) => {
       addUtilities({
         '.region-drag': {
