@@ -3,6 +3,7 @@ import path from 'node:path'
 import { electronApp, optimizer, is } from '@electron-toolkit/utils'
 import { registerRoute } from '../lib/electron-router-dom.ts'
 import { createTray } from './tray.ts'
+import { createShortcuts } from './shortcuts.ts'
 
 import './ipc.ts'
 import './store.ts'
@@ -33,6 +34,7 @@ function createWindow(): void {
   })
 
   createTray(mainWindow);
+  createShortcuts(mainWindow);
 
   registerRoute({
     id: 'main',

@@ -25,7 +25,7 @@ export function createTray(window: BrowserWindow) {
     { label: 'Documentos recentes', enabled: false },
     {
       label: 'Discover',
-      accelerator: 'CommandOrControl+1',
+      accelerator: 'CmdOrCtrl+1',
       acceleratorWorksWhenHidden: false,
     },
     {
