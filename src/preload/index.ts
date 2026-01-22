@@ -5,7 +5,6 @@ import { CreateDocumentResponse, DeleteDocumentRequest, FetchAllDocumentsRespons
 
 declare global {
   interface Window {
-    electron: ElectronAPI
     api: typeof api
   }
 }
@@ -30,18 +29,23 @@ const api = {
     return ipcRenderer.invoke(IPC.DOCUMENTS.DELETE, param)
   },
 
+  onNewDocumentRequest(callback: () => void) {
+    ipcRenderer.on('new-document', callback)
+
+    return () => {
+      ipcRenderer.off('new-document', callback)
+    }
+  },
+
 }
 
 if (process.contextIsolated) {
   try {
-    contextBridge.exposeInMainWorld('electron', electronAPI)
     contextBridge.exposeInMainWorld('api', api)
   } catch (error) {
     console.error(error)
   }
 } else {
-  // @ts-ignore (define in dts)
-  window.electron = electronAPI
   // @ts-ignore (define in dts)
   window.api = api
 }

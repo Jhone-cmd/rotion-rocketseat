@@ -1,9 +1,8 @@
-import { app, Menu, Tray, nativeImage } from "electron";
+import { app, Menu, Tray, nativeImage, BrowserWindow } from "electron";
 import path from "node:path";
 
-app.whenReady().then(() => {
-
-  const iconPath = path.join(__dirname, '../../resources/rotionTemplate.png');
+export function createTray(window: BrowserWindow) {
+   const iconPath = path.join(__dirname, '../../resources/rotionTemplate.png');
 
   const icon = nativeImage.createFromPath(iconPath);
 
@@ -14,15 +13,39 @@ app.whenReady().then(() => {
   const tray = new Tray(icon);
 
   const menu = Menu.buildFromTemplate([
+    { label: 'Rotion', enabled: false },
+    { type: 'separator' },
     {
-      label: 'Rotion', enabled: false
+      label: 'Criar novo documento',
+      click: () => {
+        window.webContents.send('new-document')
+      },
     },
     { type: 'separator' },
-    { label: 'Rotion'},
+    { label: 'Documentos recentes', enabled: false },
     {
-      label: 'Quit', click: () => { app.quit(); }
-    }
+      label: 'Discover',
+      accelerator: 'CommandOrControl+1',
+      acceleratorWorksWhenHidden: false,
+    },
+    {
+      label: 'Ignite',
+      accelerator: 'CommandOrControl+2',
+      acceleratorWorksWhenHidden: false,
+    },
+    {
+      label: 'Rocketseat',
+      accelerator: 'CommandOrControl+3',
+      acceleratorWorksWhenHidden: false,
+    },
+    { type: 'separator' },
+    {
+      label: 'Sair do Rotion',
+      role: 'quit',
+    },
   ]);
 
   tray.setContextMenu(menu);
-})
+}
+
+

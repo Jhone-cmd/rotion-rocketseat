@@ -31,7 +31,7 @@ export function Editor({ content, onContentUpdated }: EditorProps) {
         emptyEditorClass: "before:content-[attr(data-placeholder)] before:text-gray-500 before:h-0before:float-left before:pointer-events-none",
       })],
     onUpdate: ({ editor }) => {
-      const contentRegex = /(<h1>(?<title>.+)<\/h1>(?<content>.+)?)/
+      const contentRegex = /(<h1>(?<title>.+)<\/h1>(?<content>.+))/
       const parsedContent = editor.getHTML().match(contentRegex)?.groups;
 
 

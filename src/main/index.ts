@@ -2,10 +2,11 @@ import { app, shell, BrowserWindow, ipcMain } from 'electron'
 import path from 'node:path'
 import { electronApp, optimizer, is } from '@electron-toolkit/utils'
 import { registerRoute } from '../lib/electron-router-dom.ts'
+import { createTray } from './tray.ts'
 
 import './ipc.ts'
 import './store.ts'
-import './tray.ts'
+
 
 function createWindow(): void {
 
@@ -30,6 +31,8 @@ function createWindow(): void {
       sandbox: false,
     },
   })
+
+  createTray(mainWindow);
 
   registerRoute({
     id: 'main',
