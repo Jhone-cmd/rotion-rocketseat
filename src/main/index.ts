@@ -5,6 +5,7 @@ import { registerRoute } from '../lib/electron-router-dom.ts'
 
 import './ipc.ts'
 import './store.ts'
+import './tray.ts'
 
 function createWindow(): void {
 

@@ -23,20 +23,25 @@ export function Editor({ content, onContentUpdated }: EditorProps) {
       }),
       StarterKit.configure({
         document: false,
-      }), Highlight, Typography, Placeholder.configure({
+      }),
+      Highlight,
+      Typography,
+      Placeholder.configure({
         placeholder: "Untitled",
-        emptyEditorClass: "before:content-[attr(data-placeholder)] before:text-gray-500 before:float-left before:h-0 before:pointer-events-none",
+        emptyEditorClass: "before:content-[attr(data-placeholder)] before:text-gray-500 before:h-0before:float-left before:pointer-events-none",
       })],
     onUpdate: ({ editor }) => {
-      const contentRegex = /(<h1>(?<title>.+)<\/h1>(?<content>.+))/;
+      const contentRegex = /(<h1>(?<title>.+)<\/h1>(?<content>.+)?)/
       const parsedContent = editor.getHTML().match(contentRegex)?.groups;
 
 
-      const title = parsedContent?.title || "Untitled";
-      const content = parsedContent?.content || "";
+      const title = parsedContent?.title ?? 'Untitled'
+      const content = parsedContent?.content ?? ''
 
-      onContentUpdated({ title, content });
-
+      onContentUpdated({
+        title,
+        content,
+      });
     },
     content,
     autofocus: 'end',

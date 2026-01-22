@@ -11,12 +11,15 @@ const tsconfigPaths = tsconfigPathsPlugin({
 export default defineConfig({
   main: {
     plugins: [tsconfigPaths],
-    publicDir: path.resolve('resources/icon.png'),
+    publicDir: path.resolve('resources'),
   },
   preload: {
     plugins: [tsconfigPaths],
   },
   renderer: {
+    define: {
+      'process.platform': JSON.stringify(process.platform),
+    },
     css: {
       postcss: {
         plugins: [
