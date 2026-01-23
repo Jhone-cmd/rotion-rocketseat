@@ -13,12 +13,13 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Install Node.js, NPM and Yarn
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
-          node-version: 18
+          node-version: 22
+          cache: "yarn"
 
       - name: apt-update
         if: startsWith(matrix.os, 'ubuntu-latest')
@@ -30,7 +31,7 @@ jobs:
 
       - name: Install libarchive rpm on Linux
         if: startsWith(matrix.os, 'ubuntu-latest')
-        run: sudo apt-get install libarchive-tools rpm
+        run: sudo apt-get install -y libarchive-tools rpm
 
       - name: Release Electron app
         uses: samuelmeuli/action-electron-builder@v1
