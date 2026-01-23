@@ -1,11 +1,15 @@
+name: Release Rotion
+
 on:
   push:
-    tags: ["*"]
+    tags: ["v*"]
 
 jobs:
   release:
-    if: startsWith(github.ref, 'refs/tags/v')
     runs-on: ${{ matrix.os }}
+
+    permissions:
+      contents: write # Libera o acesso para criar o Release e subir os arquivos
 
     strategy:
       matrix:
@@ -15,25 +19,24 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Install Node.js, NPM and Yarn
+      - name: Install Node.js
         uses: actions/setup-node@v4
         with:
           node-version: 22
+          cache: "npm" # Faz o cache das dependências do npm para build mais rápido
 
-      - name: apt-update
-        if: startsWith(matrix.os, 'ubuntu-latest')
-        run: sudo apt-get update
+      - name: Install Dependencies
+        run: npm ci # 'npm ci' é melhor para automação (instala exatamente o que está no package-lock.json)
 
-      - name: autoremove
-        if: startsWith(matrix.os, 'ubuntu-latest')
-        run: sudo apt autoremove
+      - name: Install Linux Build Dependencies
+        if: matrix.os == 'ubuntu-latest'
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y libarchive-tools rpm
 
-      - name: Install libarchive rpm on Linux
-        if: startsWith(matrix.os, 'ubuntu-latest')
-        run: sudo apt-get install -y libarchive-tools rpm
-
-      - name: Release Electron app
+      - name: Build & Release Electron App
         uses: samuelmeuli/action-electron-builder@v1
         with:
-          github_token: ${{ secrets.github_token }}
+          github_token: ${{ secrets.GITHUB_TOKEN }}
           release: true
+          # A action usará automaticamente o comando de build configurado no seu package.json
