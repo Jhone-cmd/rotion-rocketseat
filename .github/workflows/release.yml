@@ -9,7 +9,7 @@ jobs:
     runs-on: ${{ matrix.os }}
 
     permissions:
-      contents: write # Libera o acesso para criar o Release e subir os arquivos
+      contents: write
 
     strategy:
       matrix:
@@ -19,14 +19,21 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      # 1. Instalar o pnpm antes de configurar o Node
+      - name: Install pnpm
+        uses: pnpm/action-setup@v3
+        with:
+          version: 9
+
       - name: Install Node.js
         uses: actions/setup-node@v4
         with:
           node-version: 22
-          cache: "npm" # Faz o cache das dependências do npm para build mais rápido
+          cache: "pnpm" # Agora o cache funcionará com o pnpm-lock.yaml
 
+      # 2. Usar 'pnpm install' com frozen-lockfile (equivalente ao npm ci)
       - name: Install Dependencies
-        run: npm ci # 'npm ci' é melhor para automação (instala exatamente o que está no package-lock.json)
+        run: pnpm install --frozen-lockfile
 
       - name: Install Linux Build Dependencies
         if: matrix.os == 'ubuntu-latest'
@@ -39,4 +46,3 @@ jobs:
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           release: true
-          # A action usará automaticamente o comando de build configurado no seu package.json
